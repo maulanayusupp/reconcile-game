@@ -1,0 +1,26 @@
+{
+  "name": "Reconcile — Payment Ops Puzzle",
+  "short_name": "Reconcile",
+  "description": "Match payment transactions across Gateway, Internal DB, and Bank Settlement systems before customers riot. A puzzle game about payment ops, reconciliation, and chargebacks.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0e1c",
+  "theme_color": "#0a0e1c",
+  "categories": ["games", "puzzle", "education"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import { useTutorial } from '~/composables/useTutorial'
 
 const tutorial = useTutorial()
 const targetRect = ref<DOMRect | null>(null)
-const PAD = 8
+const PAD = 10
 
 const active = computed(() => tutorial.state.active)
 const step = computed(() => tutorial.currentStep.value)
@@ -76,9 +76,13 @@ const holeStyle = computed(() => {
   }
 })
 
+// Effective side after auto-flip when there's not enough room
+const effectiveSide = ref<'top' | 'bottom' | 'left' | 'right' | 'center'>('center')
+
 const tooltipStyle = computed(() => {
-  const pos = step.value?.position ?? 'center'
-  if (!targetRect.value || pos === 'center') {
+  const wantPos = step.value?.position ?? 'center'
+  if (!targetRect.value || wantPos === 'center') {
+    effectiveSide.value = 'center'
     return {
       top: '50%',
       left: '50%',
@@ -86,35 +90,51 @@ const tooltipStyle = computed(() => {
     }
   }
   const r = targetRect.value
-  const tipW = 340
-  const tipH = 200
   const gap = 18
+  const tipW = 340
+  const tipH = 240 // generous estimate
+  const vw = typeof window !== 'undefined' ? window.innerWidth : 1280
+  const vh = typeof window !== 'undefined' ? window.innerHeight : 800
+
+  // Try requested side first; if not enough room, flip to the opposite side.
+  const fits = (side: typeof wantPos) => {
+    if (side === 'top')    return r.top - gap - tipH > 16
+    if (side === 'bottom') return r.bottom + gap + tipH < vh - 16
+    if (side === 'left')   return r.left - gap - tipW > 16
+    if (side === 'right')  return r.right + gap + tipW < vw - 16
+    return true
+  }
+  const opposite: Record<string, any> = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' }
+  let side = wantPos
+  if (!fits(side)) side = opposite[side] ?? side
+  effectiveSide.value = side as any
+
   let top = 0
   let left = 0
-  if (pos === 'top') {
-    top = r.top - tipH - gap
-    left = r.left + r.width / 2 - tipW / 2
-  } else if (pos === 'bottom') {
+  let transform = 'none'
+  const halfW = tipW / 2
+  const halfH = tipH / 2
+  if (side === 'top') {
+    top = r.top - gap
+    left = Math.max(16 + halfW, Math.min(vw - 16 - halfW, r.left + r.width / 2))
+    transform = 'translate(-50%, -100%)'
+  } else if (side === 'bottom') {
     top = r.bottom + gap
-    left = r.left + r.width / 2 - tipW / 2
-  } else if (pos === 'right') {
-    top = r.top + r.height / 2 - tipH / 2
+    left = Math.max(16 + halfW, Math.min(vw - 16 - halfW, r.left + r.width / 2))
+    transform = 'translate(-50%, 0)'
+  } else if (side === 'left') {
+    top = Math.max(16 + halfH, Math.min(vh - 16 - halfH, r.top + r.height / 2))
+    left = r.left - gap
+    transform = 'translate(-100%, -50%)'
+  } else if (side === 'right') {
+    top = Math.max(16 + halfH, Math.min(vh - 16 - halfH, r.top + r.height / 2))
     left = r.right + gap
-  } else if (pos === 'left') {
-    top = r.top + r.height / 2 - tipH / 2
-    left = r.left - tipW - gap
+    transform = 'translate(0, -50%)'
   }
-  // clamp to viewport
-  top = Math.max(16, Math.min(window.innerHeight - tipH - 16, top))
-  left = Math.max(16, Math.min(window.innerWidth - tipW - 16, left))
-  return {
-    top: `${top}px`,
-    left: `${left}px`,
-    transform: 'none',
-  }
+  return { top: `${top}px`, left: `${left}px`, transform }
 })
 
-const arrowSide = computed(() => step.value?.position ?? 'center')
+const arrowSide = computed(() => effectiveSide.value)
 
 function next() {
   tutorial.next()

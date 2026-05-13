@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Reconcile — Payment Ops Puzzle">
+  <defs>
+    <radialGradient id="bg" cx="20%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#1a2548"/>
+      <stop offset="60%" stop-color="#0a0e1c"/>
+    </radialGradient>
+    <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5ee0c4" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#5ee0c4" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="dotGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M50 0H0V50" fill="none" stroke="#7888c8" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#9eb5d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <ellipse cx="600" cy="-50" rx="700" ry="320" fill="url(#glowA)"/>
+
+  <!-- 3 dots -->
+  <g transform="translate(900, 230)" filter="url(#dotGlow)">
+    <g stroke="#5ee0c4" stroke-width="3" stroke-opacity="0.4" stroke-linecap="round" fill="none">
+      <line x1="-70" y1="60" x2="70" y2="60"/>
+      <line x1="-70" y1="60" x2="0" y2="-60"/>
+      <line x1="70" y1="60" x2="0" y2="-60"/>
+    </g>
+    <circle cx="0" cy="-60" r="22" fill="#5ee0c4"/>
+    <circle cx="-70" cy="60" r="22" fill="#6cc9f7"/>
+    <circle cx="70" cy="60" r="22" fill="#ffc850"/>
+  </g>
+
+  <!-- Decorative panel chips -->
+  <g font-family="JetBrains Mono, Menlo, monospace" font-size="14" fill="#7888c8" letter-spacing="3">
+    <text x="80" y="120">GATEWAY · DB · BANK</text>
+  </g>
+
+  <!-- Title -->
+  <text x="80" y="280" font-family="Space Grotesk, Inter, sans-serif" font-size="148" font-weight="700" letter-spacing="6" fill="url(#titleGrad)">RECONCILE</text>
+
+  <!-- Tag -->
+  <text x="80" y="340" font-family="JetBrains Mono, Menlo, monospace" font-size="26" fill="#5ee0c4" letter-spacing="2">// payment ops puzzle</text>
+
+  <!-- Sub -->
+  <text x="80" y="400" font-family="Space Grotesk, Inter, sans-serif" font-size="30" fill="#e9eef7" opacity="0.85">Match transactions across 3 systems before customers riot.</text>
+
+  <!-- 3 small panel previews -->
+  <g transform="translate(80, 460)">
+    <g>
+      <rect width="280" height="120" rx="14" fill="#141928" stroke="#6cc9f7" stroke-opacity="0.35"/>
+      <circle cx="20" cy="22" r="5" fill="#6cc9f7"/>
+      <text x="36" y="28" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="600" fill="#ffffff">Payment Gateway</text>
+      <text x="20" y="62" font-family="JetBrains Mono, monospace" font-size="14" fill="#9eb5d8">CoffeeCo</text>
+      <text x="20" y="92" font-family="Space Grotesk, sans-serif" font-size="22" font-weight="700" fill="#ffffff">SGD 89.50</text>
+    </g>
+    <g transform="translate(310, 0)">
+      <rect width="280" height="120" rx="14" fill="#141928" stroke="#5ee0c4" stroke-opacity="0.35"/>
+      <circle cx="20" cy="22" r="5" fill="#5ee0c4"/>
+      <text x="36" y="28" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="600" fill="#ffffff">Internal DB</text>
+      <text x="20" y="62" font-family="JetBrains Mono, monospace" font-size="14" fill="#9eb5d8">CoffeeCo</text>
+      <text x="20" y="92" font-family="Space Grotesk, sans-serif" font-size="22" font-weight="700" fill="#ffffff">SGD 89.50</text>
+    </g>
+    <g transform="translate(620, 0)">
+      <rect width="280" height="120" rx="14" fill="#141928" stroke="#ffc850" stroke-opacity="0.35"/>
+      <circle cx="20" cy="22" r="5" fill="#ffc850"/>
+      <text x="36" y="28" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="600" fill="#ffffff">Bank Settlement</text>
+      <text x="20" y="62" font-family="JetBrains Mono, monospace" font-size="14" fill="#9eb5d8">CoffeeCo</text>
+      <text x="20" y="92" font-family="Space Grotesk, sans-serif" font-size="22" font-weight="700" fill="#ffffff">SGD 86.82</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Reconcile">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#1a2548"/>
+      <stop offset="100%" stop-color="#0a0e1c"/>
+    </radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Maskable safe zone: keep important elements within central 80% -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <g stroke="#5ee0c4" stroke-width="11" stroke-opacity="0.35" stroke-linecap="round">
+    <line x1="170" y1="340" x2="342" y2="340"/>
+    <line x1="170" y1="340" x2="256" y2="180"/>
+    <line x1="342" y1="340" x2="256" y2="180"/>
+  </g>
+  <g filter="url(#glow)">
+    <circle cx="256" cy="180" r="42" fill="#5ee0c4"/>
+    <circle cx="170" cy="340" r="42" fill="#6cc9f7"/>
+    <circle cx="342" cy="340" r="42" fill="#ffc850"/>
+  </g>
+</svg>
