@@ -58,6 +58,11 @@ function toggleMute() {
             <span class="play-arrow">→</span>
           </button>
 
+          <button class="tutorial-btn" @click="startTutorial">
+            <span class="tut-icon">🎓</span>
+            <span>How to play · interactive tutorial</span>
+          </button>
+
           <div class="footer-row">
             <button class="mute-btn" @click="toggleMute">
               {{ muted ? '🔇' : '🔊' }}
@@ -230,6 +235,7 @@ function toggleMute() {
 
     <FeedbackLayer :items="game.state.feedback" />
     <Toasts :items="game.state.toasts" />
+    <TutorialOverlay @finish="game.finishTutorial" />
   </div>
 </template>
 
@@ -361,6 +367,30 @@ function toggleMute() {
 }
 .play-arrow { transition: transform 0.18s; }
 .play-btn:hover .play-arrow { transform: translateX(4px); }
+
+.tutorial-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px dashed rgba(94, 224, 196, 0.3);
+  color: rgba(220,230,245,0.85);
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+}
+.tutorial-btn:hover {
+  border-color: rgba(94, 224, 196, 0.6);
+  background: rgba(94, 224, 196, 0.05);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.tut-icon { font-size: 1rem; }
 
 .footer-row {
   display: flex;
